@@ -9,5 +9,4 @@ public class TicTacToeApplication {
     public static void main(String[] args) {
         SpringApplication.run(TicTacToeApplication.class, args);
     }
-
 }
