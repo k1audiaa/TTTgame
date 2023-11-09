@@ -28,4 +28,9 @@ public class UserService {
         for (TicTacToeGame thing : iterator)  things.add(thing);
         return things;
     }
+
+    public void delete(Long thingId) {
+        repo.deleteById(thingId);
+
+    }
 }

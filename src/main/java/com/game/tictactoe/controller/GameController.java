@@ -39,5 +39,10 @@ public class GameController{
         return service.getAll();
     }
 
+    @DeleteMapping("/things/{id}")
+    public void deleteThing(@PathVariable String id) {
+        Long thingId = Long.parseLong(id);
+        service.delete(thingId);
+    }
 }
 
