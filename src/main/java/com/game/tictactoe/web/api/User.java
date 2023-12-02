@@ -1,4 +1,4 @@
-package com.game.tictactoe.api;
+package com.game.tictactoe.web.api;
 
 public class User {
 
