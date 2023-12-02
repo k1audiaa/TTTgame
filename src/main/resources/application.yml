@@ -22,3 +22,6 @@ spring:
     init:
       platform: postgres
       mode: always
+
+server:
+  port: 8081
