@@ -1,0 +1,19 @@
+{
+  "name": "tictactoe",
+  "version": "1.0.0",
+  "description": "This is the repository of our assignment for the \"Webtechnologie\" course. It contains our project, a TicTacToe game (TTTgame).",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k1audiaa/TTTGame-Frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/k1audiaa/TTTGame-Frontend/issues"
+  },
+  "homepage": "https://github.com/k1audiaa/TTTGame-Frontend#readme"
+}
