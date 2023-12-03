@@ -55,5 +55,4 @@ public class UserEntity {
         this.password = password;
     }
 
-
 }

@@ -3,7 +3,7 @@ package com.game.tictactoe.service;
 import com.game.tictactoe.persistence.UserEntity;
 import com.game.tictactoe.persistence.UserRepository;
 import com.game.tictactoe.web.api.User;
-import com.game.tictactoe.web.api.UserCreateRequest;
+import com.game.tictactoe.web.api.UserManipulationRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class UserService {
         return userEntity.map(this::transformEntity).orElse(null);
     }
 
-    public User create(UserCreateRequest request) {
+    public User create(UserManipulationRequest request) {
         var userEntity = new UserEntity(
                 request.getUsername(),
                 request.getPointsString(),
@@ -44,7 +44,7 @@ public class UserService {
         return transformEntity(userEntity);
     }
 
-    public User update(Long id, UserCreateRequest request) {
+    public User update(Long id, UserManipulationRequest request) {
         var userEntityOptional = userRepository.findById(id);
         if (userEntityOptional.isEmpty()) {
             return null;

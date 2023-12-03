@@ -1,15 +1,15 @@
 package com.game.tictactoe.web.api;
 
-public class UserCreateRequest {
+public class UserManipulationRequest {
 
     private String username;
     private int points;
     private String password;
 
-    public UserCreateRequest() {
+    public UserManipulationRequest() {
     }
 
-    public UserCreateRequest(String username, int points, String password) {
+    public UserManipulationRequest(String username, int points, String password) {
         this.username = username;
         this.points = points;
         this.password = password;

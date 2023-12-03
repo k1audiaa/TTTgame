@@ -1,9 +1,8 @@
 package com.game.tictactoe.web;
 
-import com.game.tictactoe.persistence.UserRepository;
 import com.game.tictactoe.service.UserService;
 import com.game.tictactoe.web.api.User;
-import com.game.tictactoe.web.api.UserCreateRequest;
+import com.game.tictactoe.web.api.UserManipulationRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,14 +32,14 @@ public class UserRestController {
     }
 
     @PostMapping("/api/users")
-    public ResponseEntity<Void> createUser(@RequestBody UserCreateRequest request) throws URISyntaxException {
+    public ResponseEntity<Void> createUser(@RequestBody UserManipulationRequest request) throws URISyntaxException {
         var user = userService.create(request);
         URI uri = new URI("/api/users/" + user.getId());
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping("/api/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserCreateRequest request) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserManipulationRequest request) {
         var user = userService.update(id, request);
         return user != null? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
