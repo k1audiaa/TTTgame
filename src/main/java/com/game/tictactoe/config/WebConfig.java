@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**").allowedMethods("*").allowedOrigins(
                 "http://localhost:5173",
-                "https://htwberlin-webtech-tttgamefront-1a343dde6933.herokuapp.com");
+                "https://tictactoe-frontend-u9o2.onrender.com");
     }
 
 }
