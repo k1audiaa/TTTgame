@@ -75,4 +75,8 @@ public class UserService {
         );
     }
 
+    public Object getUser() {
+        return null;
+    }
+
 }
