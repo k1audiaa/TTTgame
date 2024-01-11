@@ -5,10 +5,10 @@ public class User {
     private long id;
     private String username;
     private String password;
-    private String points;
-    private String level;
+    private int points;
+    private int level;
 
-    public User(long id, String username, String password, String points, String level) {
+    public User(long id, String username, String password, int points, int level) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -28,15 +28,15 @@ public class User {
         return password;
     }
 
-    public String getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public String getLevel() {
+    public int getLevel() {
     	return level;
     }
 
-    public void setPoints(String points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 
@@ -48,7 +48,7 @@ public class User {
     	this.username = username;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
     	this.level = level;
     }
 

@@ -7,6 +7,7 @@ import com.game.tictactoe.web.api.UserManipulationRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Handler;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +32,18 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    public UserEntity updatePoints(Long id, int points) {
+        UserEntity user = userRepository.findById(id).orElse(null);
+
+        if (user != null) {
+            user.setPoints(user.getPoints() + points);
+            userRepository.save(user);
+        }
+
+        return user;
+    }
+
+
     public User findById(Long id) {
         var userEntity = userRepository.findById(id);
         return userEntity.map(this::transformEntity).orElse(null);
@@ -40,8 +53,8 @@ public class UserService {
         var userEntity = new UserEntity(
                 request.getUsername(),
                 request.getPassword(),
-                request.getPointsString(),
-                request.getLevelString());
+                request.getPoints(),
+                request.getLevel());
         userEntity = userRepository.save(userEntity);
         return transformEntity(userEntity);
     }
@@ -54,8 +67,8 @@ public class UserService {
         var userEntity = userEntityOptional.get();
         userEntity.setUsername(request.getUsername());
         userEntity.setPassword(request.getPassword());
-        userEntity.setPoints(request.getPointsString());
-        userEntity.setLevel(request.getLevelString());
+        userEntity.setPoints(request.getPoints());
+        userEntity.setLevel(request.getLevel());
         userRepository.save(userEntity);
         return transformEntity(userEntity);
     }

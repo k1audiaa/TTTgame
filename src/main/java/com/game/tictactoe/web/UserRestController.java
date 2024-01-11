@@ -44,6 +44,24 @@ public class UserRestController {
         return user != null? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/api/users/{id}/updatePoints")
+    public ResponseEntity<User> updatePoints(@PathVariable Long id, @RequestParam int points) {
+        var userEntity = userService.updatePoints(id, points);
+
+        if (userEntity != null) {
+            var user = new User(
+                    userEntity.getId(),
+                    userEntity.getUsername(),
+                    userEntity.getPassword(),
+                    userEntity.getPoints(),
+                    userEntity.getLevel()
+            );
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/api/users/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         boolean succesful = userService.deleteById(id);

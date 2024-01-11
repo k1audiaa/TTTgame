@@ -14,15 +14,15 @@ public class UserEntity {
     private String username;
 
     @Column(name = "points")
-    private String points;
+    private int points;
 
     @Column(name = "password")
     private String password;
 
     @Column(name= "level" )
-    private String level;
+    private int level;
 
-    public UserEntity(String username, String password, String points, String level) {
+    public UserEntity(String username, String password, int points, int level) {
         this.username = username;
         this.password = password;
         this.points = points;
@@ -39,11 +39,11 @@ public class UserEntity {
         return username;
     }
 
-    public String getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public String getLevel() {
+    public int getLevel() {
     	return level;
     }
 
@@ -55,11 +55,11 @@ public class UserEntity {
         this.username = username;
     }
 
-    public void setPoints(String points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
     	this.level = level;
     }
 
