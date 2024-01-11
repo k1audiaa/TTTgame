@@ -45,8 +45,8 @@ public class UserRestController {
     }
 
     @PutMapping("/api/users/{id}/updatePoints")
-    public ResponseEntity<User> updatePoints(@PathVariable Long id, @RequestParam int points) {
-        var userEntity = userService.updatePoints(id, points);
+    public ResponseEntity<User> updatePointsAndLevel(@PathVariable Long id, @RequestParam int points) {
+        var userEntity = userService.updateLevel(id, points);
 
         if (userEntity != null) {
             var user = new User(

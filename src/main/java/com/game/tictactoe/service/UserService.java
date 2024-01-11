@@ -7,7 +7,6 @@ import com.game.tictactoe.web.api.UserManipulationRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.logging.Handler;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +42,44 @@ public class UserService {
         return user;
     }
 
+    public UserEntity updateLevel(Long id, int points) {
+        UserEntity user = userRepository.findById(id).orElse(null);
+
+        if (user != null) {
+            user.setPoints(user.getPoints() + points);
+            int newLevel = calculateLevel(user.getPoints());
+            user.setLevel(newLevel);
+            userRepository.save(user);
+        }
+
+        return user;
+    }
+
+    public int calculateLevel(int points) {
+        if (points >= 100 && points < 200) {
+            return 1;
+        } else if (points >= 200 && points < 300) {
+            return 2;
+        } else if (points >= 300 && points < 400) {
+            return 3;
+        } else if (points >= 400 && points < 500) {
+            return 4;
+        } else if (points >= 500 && points < 600) {
+            return 5;
+        } else if (points >= 600 && points <700) {
+            return 6;
+        } else if (points >= 700 && points < 800) {
+            return 7;
+        } else if (points >= 800 && points < 900) {
+            return 8;
+        } else if (points >= 900 && points < 1000) {
+            return 9;
+        } else if (points >= 1000) {
+            return 10;
+        } else {
+            return 100;
+        }
+    }
 
     public User findById(Long id) {
         var userEntity = userRepository.findById(id);
