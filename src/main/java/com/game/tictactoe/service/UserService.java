@@ -24,9 +24,9 @@ public class UserService {
                 .map(userEntity -> new User(
                         userEntity.getId(),
                         userEntity.getUsername(),
+                        userEntity.getPassword(),
                         userEntity.getPoints(),
-                        userEntity.getLevel(),
-                        userEntity.getPassword()
+                        userEntity.getLevel()
                 ))
                 .collect(Collectors.toList());
     }
@@ -39,8 +39,8 @@ public class UserService {
     public User create(UserManipulationRequest request) {
         var userEntity = new UserEntity(
                 request.getUsername(),
-                request.getPointsString(),
                 request.getPassword(),
+                request.getPointsString(),
                 request.getLevelString());
         userEntity = userRepository.save(userEntity);
         return transformEntity(userEntity);
@@ -53,8 +53,8 @@ public class UserService {
         }
         var userEntity = userEntityOptional.get();
         userEntity.setUsername(request.getUsername());
-        userEntity.setPoints(request.getPointsString());
         userEntity.setPassword(request.getPassword());
+        userEntity.setPoints(request.getPointsString());
         userEntity.setLevel(request.getLevelString());
         userRepository.save(userEntity);
         return transformEntity(userEntity);
@@ -73,8 +73,8 @@ public class UserService {
         return new User(
                 userEntity.getId(),
                 userEntity.getUsername(),
-                userEntity.getPoints(),
                 userEntity.getPassword(),
+                userEntity.getPoints(),
                 userEntity.getLevel()
         );
     }

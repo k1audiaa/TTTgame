@@ -10,10 +10,10 @@ public class UserManipulationRequest {
     public UserManipulationRequest() {
     }
 
-    public UserManipulationRequest(String username, int points, String password, int level) {
+    public UserManipulationRequest(String username, String password,  int points, int level) {
         this.username = username;
-        this.points = points;
         this.password = password;
+        this.points = points;
         this.level = level;
     }
 
@@ -35,6 +35,14 @@ public class UserManipulationRequest {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public void setLevel(int level) {
+    	this.level = level;
+    }
+
+    public int getLevel() {
+    	return level;
     }
 
     public void setPassword(String password) {
