@@ -5,14 +5,16 @@ public class UserManipulationRequest {
     private String username;
     private int points;
     private String password;
+    private int level;
 
     public UserManipulationRequest() {
     }
 
-    public UserManipulationRequest(String username, int points, String password) {
+    public UserManipulationRequest(String username, int points, String password, int level) {
         this.username = username;
         this.points = points;
         this.password = password;
+        this.level = level;
     }
 
     public String getUsername() {
@@ -41,5 +43,8 @@ public class UserManipulationRequest {
 
     public String getPointsString() {
         return Integer.toString(points);
+    }
+    public String getLevelString() {
+    	return Integer.toString(level);
     }
 }

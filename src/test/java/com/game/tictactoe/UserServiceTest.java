@@ -9,6 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static java.lang.reflect.Array.get;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrlTemplate;
@@ -26,12 +27,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     public void testGetRoute() throws Exception {
        //Test Daten und Service Mock
-       User user = new User(1,"username", "password", "points");
-       user.setId(1);
-       when(userService.getUser()).thenReturn(user);
+        User user = new User(1,"username", "password", "points", "level");
+        user.setId(1);
+        when(userService.getUser()).thenReturn(user);
        //Erwartetes Ergebnis
-         String expected = "{\"id\":1,\"username\":\"username\",\"password\":\"password\",\"points\":\"points\"}";
-         //Aufruf und Vergleich
+        String expected = "{\"id\":1,\"username\":\"username\",\"password\":\"password\",\"points\":\"points\", \"level\":\"level\"}";
+        //Aufruf und Vergleich
         this.mockMvc.perform(get("user"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

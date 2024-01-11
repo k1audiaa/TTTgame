@@ -19,10 +19,14 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    public UserEntity(String username, String password, String points) {
+    @Column(name= "level" )
+    private String level;
+
+    public UserEntity(String username, String password, String points, String level) {
         this.username = username;
         this.password = password;
         this.points = points;
+        this.level = level;
     }
 
     protected UserEntity() {}
@@ -39,6 +43,10 @@ public class UserEntity {
         return points;
     }
 
+    public String getLevel() {
+    	return level;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -49,6 +57,10 @@ public class UserEntity {
 
     public void setPoints(String points) {
         this.points = points;
+    }
+
+    public void setLevel(String level) {
+    	this.level = level;
     }
 
     public void setPassword(String password) {

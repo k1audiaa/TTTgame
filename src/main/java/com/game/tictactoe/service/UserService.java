@@ -25,6 +25,7 @@ public class UserService {
                         userEntity.getId(),
                         userEntity.getUsername(),
                         userEntity.getPoints(),
+                        userEntity.getLevel(),
                         userEntity.getPassword()
                 ))
                 .collect(Collectors.toList());
@@ -39,7 +40,8 @@ public class UserService {
         var userEntity = new UserEntity(
                 request.getUsername(),
                 request.getPointsString(),
-                request.getPassword());
+                request.getPassword(),
+                request.getLevelString());
         userEntity = userRepository.save(userEntity);
         return transformEntity(userEntity);
     }
@@ -53,6 +55,7 @@ public class UserService {
         userEntity.setUsername(request.getUsername());
         userEntity.setPoints(request.getPointsString());
         userEntity.setPassword(request.getPassword());
+        userEntity.setLevel(request.getLevelString());
         userRepository.save(userEntity);
         return transformEntity(userEntity);
     }
@@ -71,7 +74,8 @@ public class UserService {
                 userEntity.getId(),
                 userEntity.getUsername(),
                 userEntity.getPoints(),
-                userEntity.getPassword()
+                userEntity.getPassword(),
+                userEntity.getLevel()
         );
     }
 
