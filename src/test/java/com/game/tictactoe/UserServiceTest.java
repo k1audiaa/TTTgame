@@ -27,16 +27,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     public void testGetRoute() throws Exception {
        //Test Daten und Service Mock
-        User user = new User(1,"username", "password", "points", "level");
+        User user = new User(1,"username", "password", 1, 1);
         user.setId(1);
         when(userService.getUser()).thenReturn(user);
        //Erwartetes Ergebnis
         String expected = "{\"id\":1,\"username\":\"username\",\"password\":\"password\",\"points\":\"points\", \"level\":\"level\"}";
         //Aufruf und Vergleich
-        this.mockMvc.perform(get("user"))
+        this.mockMvc.perform(get("/user"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(expected));
     }
 }
-}
+
