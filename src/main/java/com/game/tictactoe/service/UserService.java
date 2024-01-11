@@ -1,5 +1,6 @@
 package com.game.tictactoe.service;
 
+import com.game.tictactoe.TicTacToeApplication;
 import com.game.tictactoe.persistence.UserEntity;
 import com.game.tictactoe.persistence.UserRepository;
 import com.game.tictactoe.web.api.User;
@@ -133,4 +134,7 @@ public class UserService {
         return null;
     }
 
+    public TicTacToeApplication getGameById(long l) {
+        return null;
+    }
 }
