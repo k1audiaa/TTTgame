@@ -3,26 +3,29 @@ package com.game.tictactoe;
 import com.game.tictactoe.persistence.UserEntity;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class UnitTest {
+
     @Test
     void testToString() {
-       //Eingabedaten
+        // Eingabedaten
         String username = "username";
-        String points = "points";
+        int points = 100; // Hier einen gültigen Punktwert einsetzen
         String password = "password";
-        String level = "level";
+        int level = 1; // Hier einen gültigen Level-Wert einsetzen
 
-        //"System under Test" aufsetzen
+        // "System under Test" aufsetzen
         UserEntity userEntity = new UserEntity(username, password, points, level);
 
         // Erwartetes Ergebnis
-        String expected = "UserEntity{id=0, username='username', points='points', password='password', level='level'}";
+        String expected = "UserEntity{id=0, username='username', points=100, password='password', level=1}";
 
         // Tatsächliches Ergebnis
         String actual = userEntity.toString();
 
         // Vergleich
-        assert(expected.equals(actual));
-
+        assertEquals(expected, actual);
     }
 }
+
