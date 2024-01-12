@@ -17,7 +17,6 @@ public class LoginControllerTest {
 
     @Test
     public void testLogin() throws Exception {
-        // Mock-Daten für die Anmeldedaten
         String username = "testUser";
         String password = "testPassword";
 
