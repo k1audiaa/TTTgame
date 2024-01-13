@@ -20,6 +20,4 @@ public class WebConfig implements WebMvcConfigurer {
                 "https://localhost:8080",
                 "https://tictactoe-frontend-u9o2.onrender.com");
     }
-
-
 }

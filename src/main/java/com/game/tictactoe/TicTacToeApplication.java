@@ -13,24 +13,4 @@ public class TicTacToeApplication extends UserEntity {
         SpringApplication.run(TicTacToeApplication.class, args);
     }
 
-    public void setId(long l) {
-    }
-
-    public void setBoard(String xoxoxoxox) {
-    }
-
-    public void setCurrentPlayer(String x) {
-    }
-
-    public long getId() {
-        return 0;
-    }
-
-    public String getCurrentPlayer() {
-        return null;
-    }
-
-    public List<String> getBoard() {
-        return null;
-    }
 }
