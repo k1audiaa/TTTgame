@@ -92,5 +92,4 @@ public class UserRestController {
         boolean successful = userService.deleteById(id);
         return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
-
 }

@@ -85,7 +85,6 @@ public class UserService {
         return transformEntity(userEntity);
     }
 
-
     public User update(Long id, UserManipulationRequest request) {
         var userEntityOptional = userRepository.findById(id);
         if (userEntityOptional.isEmpty()) {
