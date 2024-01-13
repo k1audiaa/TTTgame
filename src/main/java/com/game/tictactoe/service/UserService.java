@@ -90,15 +90,25 @@ public class UserService {
         return userEntity.map(this::transformEntity).orElse(null);
     }
 
-    public User create(UserManipulationRequest request) {
-        var userEntity = new UserEntity(
-                request.getUsername(),
-                request.getPoints(),
-                request.getLevel()
-        );
-        userEntity = userRepository.save(userEntity);
-        return transformEntity(userEntity);
+    public User createOrUpdate(UserManipulationRequest request) {
+        String username = request.getUsername();
+
+        // Check if the username already exists
+        UserEntity existingUserEntity = userRepository.findByUsername(username);
+        if (existingUserEntity != null) {
+            // Username already exists, update the existing user
+            existingUserEntity.setPoints(request.getPoints());
+            existingUserEntity.setLevel(request.getLevel());
+            userRepository.save(existingUserEntity);
+            return transformEntity(existingUserEntity);
+        } else {
+            // Username doesn't exist, create a new user
+            var newUserEntity = new UserEntity(username, request.getPoints(), request.getLevel());
+            newUserEntity = userRepository.save(newUserEntity);
+            return transformEntity(newUserEntity);
+        }
     }
+
 
 
     public User update(Long id, UserManipulationRequest request) {

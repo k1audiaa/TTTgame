@@ -38,12 +38,30 @@ public class UserRestController {
     @PostMapping("/api/users")
     public ResponseEntity<User> createUser(@RequestBody UserManipulationRequest request) {
         try {
-            var user = userService.create(request);
+            // Check if the username already exists
+            List<UserEntity> existingUsers = userService.findAllByUsername(request.getUsername());
+            if (!existingUsers.isEmpty()) {
+                var existingUser = existingUsers.get(0);
+                return ResponseEntity.ok(mapToUser(existingUser));
+            }
+
+            // Username doesn't exist, create a new user
+            var user = userService.createOrUpdate(request);
             return ResponseEntity.status(HttpStatus.CREATED).body(user);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    private User mapToUser(UserEntity userEntity) {
+        return new User(
+                userEntity.getId(),
+                userEntity.getUsername(),
+                userEntity.getPoints(),
+                userEntity.getLevel()
+        );
+    }
+
 
 
     @PutMapping("/api/users/{id}")
