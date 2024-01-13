@@ -40,11 +40,4 @@ public class UserManipulationRequest {
     public int getLevel() {
     	return level;
     }
-
-    public String getPointsString() {
-        return Integer.toString(points);
-    }
-    public String getLevelString() {
-    	return Integer.toString(level);
-    }
 }

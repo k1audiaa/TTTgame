@@ -4,7 +4,6 @@ public class User {
 
     private long id;
     private String username;
-    private String password;
     private int points;
     private int level;
 
@@ -21,10 +20,6 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public int getPoints() {

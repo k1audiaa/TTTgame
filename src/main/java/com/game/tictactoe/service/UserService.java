@@ -31,21 +31,6 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public List<UserEntity> findAllByUsername(String username) {
-        return userRepository.findAllByUsername(username);
-    }
-
-    public UserEntity updatePoints(Long id, int points) {
-        UserEntity user = userRepository.findById(id).orElse(null);
-
-        if (user != null) {
-            user.setPoints(user.getPoints() + points);
-            userRepository.save(user);
-        }
-
-        return user;
-    }
-
     public UserEntity updateLevel(Long id, int points) {
         UserEntity user = userRepository.findById(id).orElse(null);
 
@@ -90,25 +75,15 @@ public class UserService {
         return userEntity.map(this::transformEntity).orElse(null);
     }
 
-    public User createOrUpdate(UserManipulationRequest request) {
-        String username = request.getUsername();
-
-        // Check if the username already exists
-        UserEntity existingUserEntity = userRepository.findByUsername(username);
-        if (existingUserEntity != null) {
-            // Username already exists, update the existing user
-            existingUserEntity.setPoints(request.getPoints());
-            existingUserEntity.setLevel(request.getLevel());
-            userRepository.save(existingUserEntity);
-            return transformEntity(existingUserEntity);
-        } else {
-            // Username doesn't exist, create a new user
-            var newUserEntity = new UserEntity(username, request.getPoints(), request.getLevel());
-            newUserEntity = userRepository.save(newUserEntity);
-            return transformEntity(newUserEntity);
-        }
+    public User create(UserManipulationRequest request) {
+        var userEntity = new UserEntity(
+                request.getUsername(),
+                request.getPoints(),
+                request.getLevel()
+        );
+        userEntity = userRepository.save(userEntity);
+        return transformEntity(userEntity);
     }
-
 
 
     public User update(Long id, UserManipulationRequest request) {
@@ -142,10 +117,13 @@ public class UserService {
         );
     }
 
-    public boolean doesUserExist(String username) {
+    public boolean doesUserExistByUsername(String username) {
         return userRepository.findAllByUsername(username).size() > 0;
     }
 
+    public UserEntity findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 
     public Object getUser() {
         return null;

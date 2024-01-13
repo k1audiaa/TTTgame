@@ -4,13 +4,11 @@ import com.game.tictactoe.persistence.UserEntity;
 import com.game.tictactoe.service.UserService;
 import com.game.tictactoe.web.api.User;
 import com.game.tictactoe.web.api.UserManipulationRequest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,34 +33,36 @@ public class UserRestController {
         return user != null? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/api/users/exists")
+    public ResponseEntity<Map<String, Object>> doesUserExist(@RequestParam String username) {
+        try {
+            Map<String, Object> response = new HashMap<>();
+
+            boolean userExists = userService.doesUserExistByUsername(username);
+
+            response.put("exists", userExists);
+
+            if (userExists) {
+                UserEntity user = userService.findByUsername(username);
+                response.put("userId", user.getId());
+            }
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @PostMapping("/api/users")
     public ResponseEntity<User> createUser(@RequestBody UserManipulationRequest request) {
         try {
-            // Check if the username already exists
-            List<UserEntity> existingUsers = userService.findAllByUsername(request.getUsername());
-            if (!existingUsers.isEmpty()) {
-                var existingUser = existingUsers.get(0);
-                return ResponseEntity.ok(mapToUser(existingUser));
-            }
-
-            // Username doesn't exist, create a new user
-            var user = userService.createOrUpdate(request);
+            var user = userService.create(request);
             return ResponseEntity.status(HttpStatus.CREATED).body(user);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-    private User mapToUser(UserEntity userEntity) {
-        return new User(
-                userEntity.getId(),
-                userEntity.getUsername(),
-                userEntity.getPoints(),
-                userEntity.getLevel()
-        );
-    }
-
-
 
     @PutMapping("/api/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserManipulationRequest request) {
