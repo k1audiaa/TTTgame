@@ -1,14 +1,18 @@
 package com.game.tictactoe.web;
 
+import com.game.tictactoe.persistence.UserEntity;
 import com.game.tictactoe.service.UserService;
 import com.game.tictactoe.web.api.User;
 import com.game.tictactoe.web.api.UserManipulationRequest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserRestController {
@@ -32,11 +36,15 @@ public class UserRestController {
     }
 
     @PostMapping("/api/users")
-    public ResponseEntity<Void> createUser(@RequestBody UserManipulationRequest request) throws URISyntaxException {
-        var user = userService.create(request);
-        URI uri = new URI("/api/users/" + user.getId());
-        return ResponseEntity.created(uri).build();
+    public ResponseEntity<User> createUser(@RequestBody UserManipulationRequest request) {
+        try {
+            var user = userService.create(request);
+            return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @PutMapping("/api/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserManipulationRequest request) {
@@ -52,7 +60,6 @@ public class UserRestController {
             var user = new User(
                     userEntity.getId(),
                     userEntity.getUsername(),
-                    userEntity.getPassword(),
                     userEntity.getPoints(),
                     userEntity.getLevel()
             );
@@ -64,8 +71,8 @@ public class UserRestController {
 
     @DeleteMapping("/api/users/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        boolean succesful = userService.deleteById(id);
-        return succesful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        boolean successful = userService.deleteById(id);
+        return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
 }

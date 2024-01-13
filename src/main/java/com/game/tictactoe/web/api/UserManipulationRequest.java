@@ -1,18 +1,18 @@
 package com.game.tictactoe.web.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserManipulationRequest {
 
     private String username;
     private int points;
-    private String password;
     private int level;
 
     public UserManipulationRequest() {
     }
 
-    public UserManipulationRequest(String username, String password,  int points, int level) {
+    public UserManipulationRequest(String username,  int points, int level) {
         this.username = username;
-        this.password = password;
         this.points = points;
         this.level = level;
     }
@@ -23,10 +23,6 @@ public class UserManipulationRequest {
 
     public int getPoints() {
         return points;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setUsername(String username) {
@@ -43,10 +39,6 @@ public class UserManipulationRequest {
 
     public int getLevel() {
     	return level;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPointsString() {

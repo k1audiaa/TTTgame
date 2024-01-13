@@ -25,11 +25,14 @@ public class UserService {
                 .map(userEntity -> new User(
                         userEntity.getId(),
                         userEntity.getUsername(),
-                        userEntity.getPassword(),
                         userEntity.getPoints(),
                         userEntity.getLevel()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    public List<UserEntity> findAllByUsername(String username) {
+        return userRepository.findAllByUsername(username);
     }
 
     public UserEntity updatePoints(Long id, int points) {
@@ -78,7 +81,7 @@ public class UserService {
         } else if (points >= 1000) {
             return 10;
         } else {
-            return 100;
+            return 0;
         }
     }
 
@@ -90,12 +93,13 @@ public class UserService {
     public User create(UserManipulationRequest request) {
         var userEntity = new UserEntity(
                 request.getUsername(),
-                request.getPassword(),
                 request.getPoints(),
-                request.getLevel());
+                request.getLevel()
+        );
         userEntity = userRepository.save(userEntity);
         return transformEntity(userEntity);
     }
+
 
     public User update(Long id, UserManipulationRequest request) {
         var userEntityOptional = userRepository.findById(id);
@@ -104,7 +108,6 @@ public class UserService {
         }
         var userEntity = userEntityOptional.get();
         userEntity.setUsername(request.getUsername());
-        userEntity.setPassword(request.getPassword());
         userEntity.setPoints(request.getPoints());
         userEntity.setLevel(request.getLevel());
         userRepository.save(userEntity);
@@ -124,11 +127,15 @@ public class UserService {
         return new User(
                 userEntity.getId(),
                 userEntity.getUsername(),
-                userEntity.getPassword(),
                 userEntity.getPoints(),
                 userEntity.getLevel()
         );
     }
+
+    public boolean doesUserExist(String username) {
+        return userRepository.findAllByUsername(username).size() > 0;
+    }
+
 
     public Object getUser() {
         return null;
