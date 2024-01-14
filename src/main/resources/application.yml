@@ -22,4 +22,4 @@ spring:
       mode: always
 
 server:
-  port: 8200
+  port: 8080
