@@ -1,5 +1,4 @@
-[![Java CI with Gradle](https://github.com/your-username/tic-tac-toe/actions/workflows/gradle.yml/badge.svg)](https://github.com/your-username/tic-tac-toe/actions/workflows/gradle.yml)
-
+[![Java CI with Gradle](https://github.com/k1audiaa/TTTgame/actions/workflows/gradle.yml/badge.svg)](https://github.com/k1audiaa/TTTgame/actions/workflows/gradle.yml)
 # TicTacToe Game Backend
 
 ## Introduction
