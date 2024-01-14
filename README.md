@@ -37,7 +37,7 @@ This project is a simple implementation of the classic Tic Tac Toe game. It incl
 
 2. Set up PostgreSQL database:
 
-    - Create a database named `tic_tac_toe`.
+    - Create a database named (e.g `tic_tac_toe`).
     - Update `application.yml` with your database configuration.
 
 3. Run the application:
@@ -64,8 +64,8 @@ You have to run the frontend separately from the backend. The frontend is a Vue.
 
 ## Contributors
 
-- [https://github.com/k1audiaa](https://github.com/k1audiaa)
-- https://github.com/MeraGebreyes
+- [k1audiaa](https://github.com/k1audiaa)
+- [MeraGebreyes](https://github.com/MeraGebreyes)
 
 ## License
 
