@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**").allowedMethods("*").allowedOrigins(
                 "http://localhost:5173",
-                "https://localhost:8080",
+                "https://localhost:8200",
                 "https://tictactoe-frontend-u9o2.onrender.com");
     }
 }
